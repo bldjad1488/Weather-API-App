@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  Weather API App
 //
-//  Created by Гера Угрюмова on 08.08.2021.
+//  Created by Polina Prokopenko on 08.08.2021.
 //
 
 import UIKit
