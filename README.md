@@ -1,4 +1,4 @@
-# Weather-API-App
+# Weather API App
 
 It's simple single view application for recieve weather forecast based on user's current location
 
