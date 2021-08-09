@@ -15,12 +15,18 @@ class MainViewController: UIViewController {
     let manager = CLLocationManager()
     var currentLocation: CLLocation?
     
-    var data = [Weather]()
+    var data: WeatherResponse?
+    let apiKey = "bbbf6104b2f68bb1d55d2597ee18ba3a"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTable()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
         setupLocation()
     }
     
@@ -39,14 +45,28 @@ class MainViewController: UIViewController {
     }
     
     func requestWeather() {
-        guard let currentLocation = currentLocation else {
-            return
-        }
+        guard let currentLocation = currentLocation else { return }
 
-        let longitude = currentLocation.coordinate.longitude
         let latitude = currentLocation.coordinate.latitude
+        let longitude = currentLocation.coordinate.longitude
         
-        print("\(longitude) | \(latitude)")
+        let apiURL = "https://api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)&exclude=alerts,minutely&units=metric&appid=\(apiKey)"
+        
+        URLSession.shared.dataTask(with: URL(string: apiURL)!, completionHandler: { data, response, error in
+            guard let data = data else {
+                print("Can't get JSON")
+                return
+            }
+            
+            let json: WeatherResponse?
+            do {
+                json = try JSONDecoder().decode(WeatherResponse.self, from: data)
+                self.data = json
+            } catch {
+                print(error)
+            }
+            
+        }).resume()
     }
 
 }
@@ -54,7 +74,7 @@ class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return 15 // заглушка
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
