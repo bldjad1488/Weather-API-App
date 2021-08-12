@@ -34,7 +34,6 @@
 		B7D96D6826C055890052C55E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B7D96D6B26C055890052C55E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B7D96D6D26C055890052C55E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B7D96D7426C056980052C55E /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,7 +124,6 @@
 				B7D96D6526C055850052C55E /* Main.storyboard */,
 				B7D96D6A26C055890052C55E /* LaunchScreen.storyboard */,
 				B7D96D6D26C055890052C55E /* Info.plist */,
-				B7D96D7426C056980052C55E /* TODO.md */,
 			);
 			path = "Weather API App";
 			sourceTree = "<group>";

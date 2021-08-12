@@ -15,13 +15,15 @@ class MainViewController: UIViewController {
     let manager = CLLocationManager()
     var currentLocation: CLLocation?
     
-    var data: WeatherResponse?
+    var dailyWeather = [DailyWeather]()
+    
     let apiKey = "bbbf6104b2f68bb1d55d2597ee18ba3a"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupTable()
+        requestWeather()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -50,20 +52,29 @@ class MainViewController: UIViewController {
         let latitude = currentLocation.coordinate.latitude
         let longitude = currentLocation.coordinate.longitude
         
+        print("\(latitude) \(longitude)")
+        
         let apiURL = "https://api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)&exclude=alerts,minutely&units=metric&appid=\(apiKey)"
         
         URLSession.shared.dataTask(with: URL(string: apiURL)!, completionHandler: { data, response, error in
             guard let data = data else {
-                print("Can't get JSON")
+                print("Can't get JSON. Error: \(error)")
                 return
             }
             
-            let json: WeatherResponse?
+            let json: WeatherResponse
+            
             do {
                 json = try JSONDecoder().decode(WeatherResponse.self, from: data)
-                self.data = json
+                
+                self.dailyWeather = json.daily
+                print(self.dailyWeather)
             } catch {
                 print(error)
+            }
+            
+            DispatchQueue.main.async {
+                self.weatherTable.reloadData()
             }
             
         }).resume()
@@ -74,11 +85,19 @@ class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15 // заглушка
+        return dailyWeather.count // заглушка
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: DailyTableViewCell.identifier, for: indexPath) as! DailyTableViewCell
+        
+        cell.configure(with: self.dailyWeather[indexPath.row])
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 45.0
     }
     
 }
