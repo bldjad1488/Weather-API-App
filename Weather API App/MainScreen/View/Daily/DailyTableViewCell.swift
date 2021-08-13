@@ -70,7 +70,7 @@ class DailyTableViewCell: UITableViewCell {
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone(abbreviation: "GMT")
         formatter.locale = Locale.current
-        formatter.dateFormat = "EEE, MMM d"
+        formatter.dateFormat = "MMM d, EEE"
         
         return formatter.string(from: date)
     }
