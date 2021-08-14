@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B7442CA126C15F430074AF3B /* HourlyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7442C9F26C15F430074AF3B /* HourlyTableViewCell.swift */; };
-		B7442CA226C15F430074AF3B /* HourlyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7442CA026C15F430074AF3B /* HourlyTableViewCell.xib */; };
 		B7442CA526C15F6D0074AF3B /* DailyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7442CA326C15F6D0074AF3B /* DailyTableViewCell.swift */; };
 		B7442CA626C15F6D0074AF3B /* DailyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7442CA426C15F6D0074AF3B /* DailyTableViewCell.xib */; };
 		B7442CA826C1643C0074AF3B /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7442CA726C1643C0074AF3B /* WeatherModel.swift */; };
@@ -21,8 +19,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B7442C9F26C15F430074AF3B /* HourlyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyTableViewCell.swift; sourceTree = "<group>"; };
-		B7442CA026C15F430074AF3B /* HourlyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HourlyTableViewCell.xib; sourceTree = "<group>"; };
 		B7442CA326C15F6D0074AF3B /* DailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableViewCell.swift; sourceTree = "<group>"; };
 		B7442CA426C15F6D0074AF3B /* DailyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyTableViewCell.xib; sourceTree = "<group>"; };
 		B7442CA726C1643C0074AF3B /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
@@ -69,7 +65,6 @@
 			isa = PBXGroup;
 			children = (
 				B7442C9E26C15F1E0074AF3B /* Daily */,
-				B7442C9D26C15F160074AF3B /* Hourly */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -80,15 +75,6 @@
 				B7D96D6326C055850052C55E /* MainViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		B7442C9D26C15F160074AF3B /* Hourly */ = {
-			isa = PBXGroup;
-			children = (
-				B7442C9F26C15F430074AF3B /* HourlyTableViewCell.swift */,
-				B7442CA026C15F430074AF3B /* HourlyTableViewCell.xib */,
-			);
-			path = Hourly;
 			sourceTree = "<group>";
 		};
 		B7442C9E26C15F1E0074AF3B /* Daily */ = {
@@ -199,7 +185,6 @@
 				B7D96D6C26C055890052C55E /* LaunchScreen.storyboard in Resources */,
 				B7442CA626C15F6D0074AF3B /* DailyTableViewCell.xib in Resources */,
 				B7D96D6926C055890052C55E /* Assets.xcassets in Resources */,
-				B7442CA226C15F430074AF3B /* HourlyTableViewCell.xib in Resources */,
 				B7D96D6726C055850052C55E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,7 +199,6 @@
 				B7D96D6426C055850052C55E /* MainViewController.swift in Sources */,
 				B7442CA526C15F6D0074AF3B /* DailyTableViewCell.swift in Sources */,
 				B7D96D6026C055850052C55E /* AppDelegate.swift in Sources */,
-				B7442CA126C15F430074AF3B /* HourlyTableViewCell.swift in Sources */,
 				B7442CA826C1643C0074AF3B /* WeatherModel.swift in Sources */,
 				B7D96D6226C055850052C55E /* SceneDelegate.swift in Sources */,
 			);

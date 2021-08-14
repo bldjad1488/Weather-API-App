@@ -14,18 +14,6 @@ class DailyTableViewCell: UITableViewCell {
     @IBOutlet var maxTempLabel: UILabel!
     @IBOutlet var iconImageView: UIImageView!
     
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
     static let identifier = "DailyTableViewCell"
     
     static func nib() -> UINib {

@@ -14,6 +14,7 @@ class MainViewController: UIViewController {
     
     let manager = CLLocationManager()
     var currentLocation: CLLocation?
+    var cityName = ""
     
     var dailyWeather = [DailyWeather]()
     var currentWeather: CurrentWeather?
@@ -24,7 +25,6 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
 
         setupTable()
-        requestWeather()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -38,7 +38,6 @@ class MainViewController: UIViewController {
         weatherTable.dataSource = self
         
         weatherTable.register(DailyTableViewCell.nib(), forCellReuseIdentifier: DailyTableViewCell.identifier)
-        weatherTable.register(HourlyTableViewCell.nib(), forCellReuseIdentifier: HourlyTableViewCell.identifier)
     }
     
     func setupLocation() {
@@ -53,13 +52,11 @@ class MainViewController: UIViewController {
         let latitude = currentLocation.coordinate.latitude
         let longitude = currentLocation.coordinate.longitude
         
-        print("\(latitude) \(longitude)")
-        
         let apiURL = "https://api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)&exclude=alerts,minutely&units=metric&appid=\(apiKey)"
         
         URLSession.shared.dataTask(with: URL(string: apiURL)!, completionHandler: { data, response, error in
             guard let data = data else {
-                print("Can't get JSON. Error: \(error)")
+                print(error!)
                 return
             }
             
@@ -69,16 +66,14 @@ class MainViewController: UIViewController {
                 json = try JSONDecoder().decode(WeatherResponse.self, from: data)
                 
                 self.dailyWeather = json.daily
+                self.dailyWeather.remove(at: 0)
                 self.currentWeather = json.current
-                
-                print(self.dailyWeather)
             } catch {
                 print(error)
             }
             
             DispatchQueue.main.async {
                 self.weatherTable.reloadData()
-                
                 self.weatherTable.tableHeaderView = self.createHeader()
             }
             
@@ -89,12 +84,11 @@ class MainViewController: UIViewController {
         guard let currentWeather = currentWeather else {
             return UIView()
         }
-
         
         let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width - 95))
         
         let currentLocationLabel = UILabel(frame: CGRect(x: 10, y: 10, width: view.frame.size.width - 20, height: view.frame.size.width / 5))
-        currentLocationLabel.text = "Current location"
+        currentLocationLabel.text = cityName
         currentLocationLabel.textAlignment = .center
         currentLocationLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 20)
         
@@ -136,13 +130,38 @@ class MainViewController: UIViewController {
         
         return header
     }
+    
+    func getPlaceFromCoordinates(_ coordinates: CLLocationCoordinate2D) {
+        let geocoder = CLGeocoder()
+        
+        let latitude = coordinates.latitude
+        let longitude = coordinates.longitude
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        
+        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+            self.cityName = self.processResponse(withPlacemarks: placemarks, error: error)
+        }
+    }
+    
+    func processResponse(withPlacemarks placemarks: [CLPlacemark]?, error: Error?) -> String {
+        if let error = error {
+            print(error)
+            return "Unable to find adress"
+        } else {
+            if let placemarks = placemarks, let placemark = placemarks.first {
+                return placemark.compactAddress!
+            } else {
+                return "No matching adress found"
+            }
+        }
+    }
 
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dailyWeather.count // заглушка
+        return dailyWeather.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -166,9 +185,28 @@ extension MainViewController: CLLocationManagerDelegate {
         if !locations.isEmpty, currentLocation == nil {
             currentLocation = locations.first
             manager.stopUpdatingLocation()
+            getPlaceFromCoordinates(locations.first!.coordinate)
             requestWeather()
         }
         
+    }
+
+}
+
+extension CLPlacemark {
+
+    var compactAddress: String? {
+        if let name = name {
+            var result = name
+
+            if let city = locality {
+                result = "\(city)"
+            }
+
+            return result
+        }
+
+        return nil
     }
 
 }
