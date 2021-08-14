@@ -1,6 +1,8 @@
 # Weather API App
 
-<img src="/AssetsForReadme/screenshots.jpg" />
+<p align="center">
+    <img src="/AssetsForReadme/screenshots.jpg" width="400px" />
+</p>
 
 Simple application for recieve weather forecast based on user's current location
 
