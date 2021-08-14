@@ -1,6 +1,8 @@
 # Weather API App
 
-It's simple single view application for recieve weather forecast based on user's current location
+<img src="/AssetsForReadme/screenshots.jpg" />
+
+Simple application for recieve weather forecast based on user's current location
 
 ### Technologies in this project
 - UIKit
