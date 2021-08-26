@@ -13,8 +13,7 @@ Simple application for recieve weather forecast based on user's current location
 - JSON parsing
 
 ## Todo 
-- Add hourly weather forecast
-- Add widget written using WidgetKit
-- Refactoring code
+- Add hourly weather forecast (I add it in other repository)
+- Add widget written using WidgetKit (It's too)
 
 
