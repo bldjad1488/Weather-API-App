@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: Базовая модель, потом изменить под UI и убрать лишнее
+// For checking API
 // https://api.openweathermap.org/data/2.5/onecall?lat=55.63896621060778&lon=37.32636603970181&exclude=alerts,minutely&units=metric&appid=bbbf6104b2f68bb1d55d2597ee18ba3a
 
 struct WeatherResponse: Codable {

@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class DailyTableViewCell: UITableViewCell {
 
     @IBOutlet var dayLabel: UILabel!
@@ -21,7 +22,7 @@ class DailyTableViewCell: UITableViewCell {
     }
     
     func configure(with model: DailyWeather) {
-        
+      
         dayLabel.text = formatDate(unixDate: model.dt)
         minTempLabel.text = "\(Int(model.temp.min))°"
         maxTempLabel.text = "\(Int(model.temp.max))°"
@@ -29,6 +30,8 @@ class DailyTableViewCell: UITableViewCell {
         dayLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 16)
         minTempLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 16)
         maxTempLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 16)
+        
+        iconImageView.tintColor = UIColor.white
         
         // Weather image setting
         
